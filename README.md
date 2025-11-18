@@ -122,10 +122,6 @@ The app will open in your default web browser. Enter a movie name and select the
 
 This project is part of the NTI final project curriculum.
 
-## 👨‍💻 Author
-
-**Mohamed Essam** (Moham3d-3ssam)
-
 ---
 
 **Note:** Both applications require their respective pickle files and data files to be present in the same directory as the web app scripts.
