@@ -131,21 +131,18 @@ if st.session_state.show_form:
     if recommend_btn and movie_name.strip():
         movie_name = movie_name.lower()
 
-        if movie_name not in movies['title'].str.lower().values:
-            st.error("❌ Movie not found in our database. Try another one!")
-        else:
-            index = movies[movies['title'].str.lower() == movie_name].index[0]
-            distances = sorted(list(enumerate(similarity[index])), reverse=True, key=lambda x: x[1])
-            recommended = [movies.iloc[i[0]] for i in distances[1:num_movies+1]]
+        index = movies[movies['title'].str.lower() == movie_name].index[0]
+        distances = sorted(list(enumerate(similarity[index])), reverse=True, key=lambda x: x[1])
+        recommended = [movies.iloc[i[0]] for i in distances[1:num_movies+1]]
 
-            df = pd.DataFrame(recommended)[['title', 'genres', 'original_language', 'vote_average', 'director']]
-            df['genres'] = df['genres'].apply(lambda x: " - ".join(x.split()))  # 🟢 separate with dashes
+        df = pd.DataFrame(recommended)[['title', 'genres', 'original_language', 'vote_average', 'director']]
+        df['genres'] = df['genres'].apply(lambda x: " - ".join(x.split()))  # 🟢 separate with dashes
 
-            df.columns = ['🎬 Movie Title', '🎭 Genres', '🌐 Language', '⭐ Rating', '🎥 Director']
-            
-            st.session_state.recommendations = df
-            st.session_state.show_form = False
-            st.rerun()
+        df.columns = ['🎬 Movie Title', '🎭 Genres', '🌐 Language', '⭐ Rating', '🎥 Director']
+        
+        st.session_state.recommendations = df
+        st.session_state.show_form = False
+        st.rerun()
 
 # ============================================================
 # 🔹 Results
@@ -164,4 +161,3 @@ if not st.session_state.show_form:
 # 🔹 Footer
 # ============================================================
 st.markdown("---")
-st.caption("Developed with ❤️ by Mohamed Essam.")
